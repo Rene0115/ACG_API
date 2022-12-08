@@ -2,7 +2,11 @@
 /* eslint-disable import/extensions */
 import express from 'express';
 import pino from 'pino';
+import dotenv from 'dotenv';
 import middleware from './middlewares/middleware.js';
+import 'express-async-errors';
+
+dotenv.config();
 
 const app = express();
 const logger = pino();
