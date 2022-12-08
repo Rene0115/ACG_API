@@ -28,7 +28,7 @@ class UserController {
 
     const response = {
       body: {
-        name: `${req.body.firstName} ${req.body.lastName}`,
+        name: `${req.body.username}`,
         intro: 'Email Verification Link',
         action: {
           instructions:
