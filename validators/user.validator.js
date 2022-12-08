@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const validateUserSchema = Joi.object().keys({
+export const validateUserSignupSchema = Joi.object().keys({
   email: Joi.string()
     .email()
     .regex(
@@ -11,4 +11,9 @@ const validateUserSchema = Joi.object().keys({
   password: Joi.string().required()
 });
 
-export default validateUserSchema;
+export const validateUserLoginSchema = Joi.object().keys({
+  username: Joi.string().required().max(15),
+  password: Joi.string().required()
+});
+
+export default { validateUserSignupSchema, validateUserLoginSchema };

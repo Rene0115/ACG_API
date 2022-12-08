@@ -73,7 +73,7 @@ class UserController {
         message: 'email or password is invalid'
       });
     }
-    const token = jwt.sign({ _id: user._id, email: user.email }, process.env.TOKEN_SECRET, { expiresIn: '20h', algorithm: 'HS512' });
+    const token = jwt.sign({ _id: user._id, username: user.username }, process.env.TOKEN_SECRET, { expiresIn: '20h', algorithm: 'HS512' });
     return res.status(200).send({
       success: true,
       body: {
