@@ -9,5 +9,6 @@ const userRouter = express.Router();
 
 userRouter.post('/signup', [validator(validateUserSchema)], userController.createUser);
 userRouter.post('/login', [validator(validateUserSchema)], userController.loginUser);
+userRouter.get('/verify/:token', userController.verify);
 
 export default userRouter;

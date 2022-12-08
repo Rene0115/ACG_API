@@ -4,6 +4,7 @@
 import _ from 'lodash';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { transporter, mailGenerator } from '../config/mailer.config.js';
 import userService from '../services/user.services.js';
 
 class UserController {
@@ -44,7 +45,7 @@ class UserController {
     const mail = mailGenerator.generate(response);
 
     const message = {
-      from: 'Nacoss-Blog <nacossblogapp@gmail.com>',
+      from: 'Across the Globe <enere0115@gmail.com>',
       to: req.body.email,
       subject: 'Verify Your Email',
       html: mail
@@ -80,6 +81,34 @@ class UserController {
         token,
         data: user
       }
+    });
+  }
+
+  async verify(req, res) {
+    const { token } = req.params;
+    // Check we have an id
+    if (!token) {
+      return res.status(422).send({
+        message: 'Missing Token'
+      });
+    }
+    // Step 1 -  Verify the token from the URL
+    const decoded = jwt.verify(
+      token,
+      process.env.TOKEN_SECRET
+    );
+    const user = await userService.findOne({ _id: decoded._id });
+    if (!user) {
+      return res.status(404).send({
+        message: 'User does not  exists'
+      });
+    }
+    // Step 3 - Update user verification status to true
+    user.verified = true;
+    await user.save();
+
+    return res.status(200).send({
+      message: 'Account Verified'
     });
   }
 }
