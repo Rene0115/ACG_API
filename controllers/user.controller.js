@@ -59,7 +59,7 @@ class UserController {
   }
 
   async loginUser(req, res) {
-    const user = await userService.findByEmail(req.body);
+    const user = await userService.findByUsername(req.body);
     if (_.isEmpty(user)) {
       return res.status(404).send({
         success: false,

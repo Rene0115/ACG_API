@@ -13,6 +13,11 @@ class UserService {
     return user;
   }
 
+  async findByUsername(data) {
+    const user = await userModel.findOne({ username: data.username });
+    return user;
+  }
+
   async findOne(filter = {}) {
     const user = await userModel.findOne(filter);
     return user;
