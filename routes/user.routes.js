@@ -7,7 +7,6 @@ import validator from '../validators/validator.js';
 
 const userRouter = express.Router();
 
-userRouter.get('/', userController.fetchUsers);
 userRouter.post('/signup', [validator(validateUserSchema)], userController.createUser);
 userRouter.post('/login', [validator(validateUserSchema)], userController.loginUser);
 
