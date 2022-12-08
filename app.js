@@ -11,7 +11,7 @@ middleware(app);
 
 app.listen(process.env.PORT, () => {
   let port = process.env.PORT;
-  if (port == null || port === '') {
+  if (port == null || port === '' || port === undefined) {
     port = 8000;
   }
 
