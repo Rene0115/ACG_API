@@ -125,13 +125,15 @@ class UserController {
     if (user) {
       const hash = bcrypt.hashSync(newPassword, 10);
 
-      await user.update({ password: hash });
+      await user.updateOne({ password: hash });
     }
 
     const response = {
       body: {
         name: `${user.username}`,
-        intro: 'Password Reset Successfully'
+        intro: 'Password Reset Successfully.',
+        outre: 'If you did not initiate this reset please contact our customer support.'
+
       }
     };
 
@@ -140,14 +142,14 @@ class UserController {
     const message = {
       from: 'Across the Globe <enere0115@gmail.com>',
       to: user.email,
-      subject: 'Password Reset Success',
+      subject: 'Password reset success',
       html: mail
     };
 
     await transporter.sendMail(message);
 
     return res.status(201).send({
-      message: `Sent a reset password email to ${user.email}`
+      message: `Password changed successfully. Confirmation email sent to  ${user.email}`
     });
   }
 }
