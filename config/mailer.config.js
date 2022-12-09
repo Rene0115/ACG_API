@@ -28,7 +28,7 @@ export const sendPasswordResetMail = async (user) => {
   // send mail
   const response = {
     body: {
-      name: `${user.firstName} ${user.lastName}`,
+      name: `${user.username}`,
       intro: 'Password Reset Link',
       action: {
         instructions:
@@ -55,4 +55,4 @@ export const sendPasswordResetMail = async (user) => {
   // return true;
 };
 
-export default { transporter, mailGenerator };
+export default { transporter, mailGenerator, sendPasswordResetMail };

@@ -111,6 +111,48 @@ class UserController {
       message: 'Account Verified'
     });
   }
+
+  async forgotPassword(req, res) {
+    const user = await userService.findByEmail(req.body);
+    if (_.isEmpty(user)) {
+      return res.status(404).send({
+        success: false,
+        message: 'user does not exist, create a user before attempting to login'
+      });
+    }
+    const url = `${process.env.APP_URL}users/reset`;
+
+    const response = {
+      body: {
+        name: `${user.username}`,
+        intro: 'Password Reset Link',
+        action: {
+          instructions:
+              'If you did not request for this mail, Please Ignore it. To reset your account password, click on the link below:',
+          button: {
+            text: 'Reset Password',
+            link: url
+          }
+        },
+        outro: 'Do not share this link with anyone.'
+      }
+    };
+
+    const mail = mailGenerator.generate(response);
+
+    const message = {
+      from: 'Across the Globe <enere0115@gmail.com>',
+      to: user.email,
+      subject: 'Verify Your Email',
+      html: mail
+    };
+
+    await transporter.sendMail(message);
+
+    return res.status(201).send({
+      message: `Sent a verification email to ${user.email}`
+    });
+  }
 }
 
 export default new UserController();
