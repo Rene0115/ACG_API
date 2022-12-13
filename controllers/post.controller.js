@@ -17,7 +17,6 @@ class PostController {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
     const body = {
       title: req.body.title,
-      category: req.body.category,
       userId: req.user._id,
       body: req.body.body,
       image: result.url
