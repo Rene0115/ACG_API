@@ -5,7 +5,7 @@ import _ from 'lodash';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { transporter, mailGenerator } from '../config/mailer.config.js';
-import userService from '../services/user.services.js';
+import userService from '../services/user.service.js';
 
 class UserController {
   async createUser(req, res) {

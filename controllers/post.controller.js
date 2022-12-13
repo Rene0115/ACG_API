@@ -5,7 +5,7 @@
 /* eslint-disable no-unused-vars */
 import cloudinary from 'cloudinary';
 import _ from 'lodash';
-import postService from '../services/post.services.js';
+import postService from '../services/post.service.js';
 
 class PostController {
   async createPost(req, res) {
