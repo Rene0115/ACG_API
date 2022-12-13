@@ -7,6 +7,11 @@ class PostService {
     const post = await postModel.create(data);
     return post;
   }
+
+  async findAndDeletePostById(id) {
+    const postId = await postModel.findByIdAndDelete(id);
+    return postId;
+  }
 }
 
 export default new PostService();

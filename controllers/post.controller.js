@@ -29,6 +29,21 @@ class PostController {
       data: post
     });
   }
+
+  async deletePost(req, res) {
+    const post = await postService.findAndDeletePostById(req.params.id);
+    if (_.isEmpty(post)) {
+      res.status(404).send({
+        status: false,
+        message:
+          'Post does not exist, pleaase create a post before attempting to delete a post'
+      });
+    }
+    res.status(200).send({
+      success: true,
+      message: 'Post deleted successfully'
+    });
+  }
 }
 
 export default new PostController();
