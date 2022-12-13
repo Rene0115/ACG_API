@@ -10,10 +10,6 @@ const postSchema = mongoose.Schema({
     default: 0,
     type: Number
   },
-  category: {
-    type: String,
-    enum: ['politics', 'entertainment', 'education', 'technology', 'sports', 'news']
-  },
   body: {
     type: String
   },
