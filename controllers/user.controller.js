@@ -92,7 +92,7 @@ class UserController {
         message: 'Missing Token'
       });
     }
-    // Step 1 -  Verify the token from the URL
+
     const decoded = jwt.verify(
       token,
       process.env.TOKEN_SECRET
@@ -100,10 +100,10 @@ class UserController {
     const user = await userService.findOne({ _id: decoded._id });
     if (!user) {
       return res.status(404).send({
-        message: 'User does not  exists'
+        message: 'User does not  exist'
       });
     }
-    // Step 3 - Update user verification status to true
+
     user.verified = true;
     await user.save();
 

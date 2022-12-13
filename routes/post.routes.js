@@ -14,5 +14,6 @@ const postRouter = express.Router();
 postRouter.post('/createpost', [authenticate, store.single('image'), validator(postValidator)], postController.createPost);
 postRouter.post('/comments', [authenticate, validator(commentValidator)], commentController.postComments);
 postRouter.delete('/:id', postController.deletePost);
+postRouter.post('/like', postController.like);
 
 export default postRouter;
