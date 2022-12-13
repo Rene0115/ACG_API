@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 const postSchema = mongoose.Schema({
   title: {
     type: String
-
   },
 
   likes: {
@@ -20,12 +19,7 @@ const postSchema = mongoose.Schema({
   },
   image: {
     type: String
-  },
-  isPublished: {
-    type: Boolean,
-    default: false
   }
-
 }, { timestamps: true });
 
 const postModel = mongoose.model('Post', postSchema);

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable import/extensions */
 import _ from 'lodash';
 import commentService from '../services/comment.service.js';
@@ -8,7 +9,7 @@ class CommentController {
     const data = {
       comment: req.body.comment,
       username: req.user.username,
-      email: req.user.email
+      postId: req.body.postId
     };
     const comment = await commentService.postComment(data);
     if (_.isEmpty(comment)) {
@@ -19,7 +20,8 @@ class CommentController {
     }
     return res.status(200).send({
       status: true,
-      message: 'comment posted successfully'
+      message: 'comment posted successfully',
+      data: comment
     });
   }
 }

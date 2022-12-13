@@ -10,11 +10,10 @@ const commentSchema = mongoose.Schema({
     required: true,
     type: String
   },
-  email: {
+  postId: {
     required: true,
     type: String
   }
-
 }, { timeStamps: true });
 
 const commentModel = mongoose.model('Comments', commentSchema);
